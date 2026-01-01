@@ -4,27 +4,26 @@
 # Copyright (C) 2018 Elvis Yu-Jing Lin <elvisyjlin@gmail.com>
 # Licensed under the MIT License - https://opensource.org/licenses/MIT
 
-import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-
-from gym_chrome_dino.utils.helpers import download_chromedriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager  # ← ADD THIS
+import os
 
 class DinoGame():
     def __init__(self, render=False, accelerate=False, autoscale=False):
-        if not os.path.exists('chromedriver') and not os.path.exists('chromedriver.exe'):
-            download_chromedriver()
-        chromedriver_path = './chromedriver'
         options = Options()
         options.add_argument('--disable-infobars')
         options.add_argument('--mute-audio')
         options.add_argument('--no-sandbox')
         options.add_argument('--window-size=800,600')
         if not render:
-            options.add_argument('--headless')
-        self.driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
-        # self.driver.get('chrome://dino')
+            options.add_argument('--headless=new')  # ← use new headless
+
+        # 👇 FORCE webdriver-manager to get a working driver
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=options)
+
         self.driver.get('https://elvisyjlin.github.io/t-rex-runner/')
         self.defaults = self.get_parameters()  # default parameters
         if not accelerate:
