@@ -5,6 +5,8 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "aiohttp>=3.13.3",
+    "cdp-socket>=1.2.8",
     "chromedriver-autoinstaller>=0.6.4",
     "gym>=0.26.2",
     "gymnasium>=1.2.3",
@@ -13,7 +15,11 @@ dependencies = [
     "numpy>=2.4.0",
     "opencv-python>=4.11.0.86",
     "pandas>=2.3.3",
+    "pipewire-capture>=0.2.9",
+    "pipewire-python>=0.2.3",
+    "pychrome>=0.2.4",
     "pygame>=2.6.1",
+    "pygobject>=3.56.0",
     "scikit-learn>=1.8.0",
     "seaborn>=0.13.2",
     "selenium>=4.39.0",
@@ -21,6 +27,7 @@ dependencies = [
     "torchmetrics>=1.8.2",
     "torchvision>=0.24.1",
     "webdriver-manager>=4.0.2",
+    "websockets>=16.0",
 ]
 
 [[tool.uv.index]]
